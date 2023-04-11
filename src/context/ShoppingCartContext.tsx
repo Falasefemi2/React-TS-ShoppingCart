@@ -34,7 +34,16 @@ export const ShoppingCartProvider = ({
     const [cartItems, setCartItems] = useLocalStorage<CartItem[]>('shopping-cart', []);
     const [isOpen, setIsOpen] = useState(false);
 
-    const cartQuantity = cartItems.reduce((quanity: any, item: { quantity: any; }) => item.quantity + quanity, 0)
+    const cartQuantity = (id: number) => {
+        return cartItems.reduce((quantity: any, item: { id: any, quantity: any }) => {
+          if (item.id === id) {
+            return item.quantity + quantity;
+          }
+          return quantity;
+        }, 0);
+      };
+
+
 
     const openCart = () => setIsOpen(true)
     const closeCart = () => setIsOpen(false)

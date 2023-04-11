@@ -2,8 +2,10 @@ import { Navbar as NavbarBs, Container, Nav, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useShoppingCart } from "../context/ShoppingCartContext";
+import { useState } from "react";
 
 const Navbar = () => {
+  const [id, setId] = useState(1);
   const {openCart, cartQuantity} = useShoppingCart()
   return (
     <NavbarBs sticky="top" className="bg-white shadow-sm mb-3">
@@ -19,7 +21,7 @@ const Navbar = () => {
             About
           </Nav.Link>
         </Nav>
-        {cartQuantity > 0 && <Button onClick={openCart}
+        {cartQuantity(id) > 0 && <Button onClick={openCart}
           variant="outline-primary"
           className="rounded-circle"
           style={{ width: "3rem", height: "3rem", position: "relative" }}
@@ -35,7 +37,7 @@ const Navbar = () => {
               transform: 'translate(25%, 25%)'
             }}
           >
-            {cartQuantity}
+            {cartQuantity(id)}
           </div>
         </Button>}
       </Container>
